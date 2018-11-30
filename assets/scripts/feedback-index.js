@@ -1,13 +1,13 @@
 'use strict'
 
 window.onload = () => {
-  const URL = 'http://ec2-18-234-187-37.compute-1.amazonaws.com:3000/daily-feedback';
+  const URL = 'http://localhost:3000/daily-feedback';
 
   fetch(URL)
     .then(resp => resp.json())
     .then(response => {
       console.log(response);
-      const parent = document.querySelector('.ul');
+      const parent = document.querySelector('.daily-feedback');
       const source = response.result;
       source.forEach(element => {
         let newChannel = document.createElement('li');
@@ -17,7 +17,6 @@ window.onload = () => {
         newChannel.appendChild(newA);
         console.log(newA);
         newA.innerText = element.channel;
-
       });
     });
 }

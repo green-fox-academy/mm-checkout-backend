@@ -1,0 +1,33 @@
+body {
+  font-style: sans-serif;
+}
+
+.feedbacklists {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.aggregated-data {
+  width: 40%;
+}
+
+.daily-feedback {
+  width: 40%;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 14px;
+}
+
+ul {
+  font-size: 12px;
+  padding: 15px;
+}
+
+a {
+  color: rgb(18, 122, 213);
+}

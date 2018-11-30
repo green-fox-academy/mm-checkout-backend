@@ -85,6 +85,7 @@ app.get('/daily-feedback', (req, res) => {
   })
 });
 
+
 app.get('/checkouts/:channel', (req, res) => {
   conn.query(`SELECT * FROM checkout WHERE channel='${req.params.channel}';`, function (err, results) {
     if (err) {
