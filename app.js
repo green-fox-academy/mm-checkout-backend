@@ -1,12 +1,12 @@
 'use strict'
 
 const express = require('express'),
-  app = express(),  
-  mysql = require('mysql'),
-  path = require('path'),
-  cors = require('cors'),
-  bodyParser = require('body-parser'),
-  jsonParser = bodyParser.json();
+app = express(),
+mysql = require('mysql'),
+path = require('path'),
+cors = require('cors'),
+bodyParser = require('body-parser'),
+jsonParser = bodyParser.json();
 
 const conn = mysql.createConnection({
   host: 'mattermostdb.caklgmbaggid.eu-central-1.rds.amazonaws.com',
@@ -59,12 +59,8 @@ app.post('/feedback', jsonParser, (req, res) => {
 });
 
 app.get('/link', (req, res) => {
-  let { username, channel_name } = req.params;
-  console.log(`${username}, ${channel_name}`);
-  res.redirect({
-    "url" : `http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${username}`,
-    "message": "Click on the link to submit your feedback."
-  });
+  const { user_name, channel_name } = req.query;
+  res.status(200).send(`http://mmcheckoutfrontend.s3-website.eu-central-1.amazonaws.com?channel_name=${channel_name}&username=${user_name} Click on the link to submit your feedback.`);
 });
 
 app.get('/daily-feedback', (req, res) => {
@@ -89,7 +85,7 @@ app.get('/checkouts/:channel', (req, res) => {
 
     let dates = results.map(feedback => feedback.created_at);
     let uniqueDates = dates.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-    
+
     let channel = req.params.channel
 
     if (err) {
@@ -108,7 +104,7 @@ app.get('/checkouts/:channel', (req, res) => {
         days: uniqueDates,
         channel: channel,
       });
-    }    
+    }
   });
 });
 
